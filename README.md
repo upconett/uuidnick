@@ -8,7 +8,7 @@ The tool comes in handy for automatisation and bash scripting.
 Simply clone the repo and build with pyinstaller.  
 Run the following command and tool will be installed:
 ```shell
-git clone https://github.com/upconett/uuidnick && pip install uuidnick/requirements.txt && pyinstaller -F -u uuidnick uuidnick/main.py && cp uuidnick/dist/uuidnick /bin
+git clone https://github.com/upconett/uuidnick && cd uuidnick && pip install -r requirements.txt && pyinstaller -F -n uuidnick main.py && cp dist/uuidnick /bin
 ```
 ---
 ### Usage
