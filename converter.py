@@ -4,14 +4,14 @@ from json import load
 from config import first_start
 
 
-def get_uuid_nickname() -> tuple:
+def get_uuid_nickname(extension: str = None) -> tuple:
     uuid, nickname = (None, None)
 
     try: uuid_or_nickname = argv[1]
     except: return None, None
 
-    if len(uuid_or_nickname) == 36 and uuid_or_nickname.count('-') == 4:
-        uuid = uuid_or_nickname
+    if len(uuid_or_nickname) - len(extension) == 36 and uuid_or_nickname.count('-') == 4:
+        uuid = uuid_or_nickname.replace(extension, '')
     else:
         nickname = uuid_or_nickname
     return uuid, nickname
@@ -22,7 +22,7 @@ def get_whitelist(whitelist_path: str) -> list[dict]:
         return load(file)
 
 
-def convert_uuid_to_nickname(whitelist_path: str, uuid: str) -> str:
+def convert_uuid_to_nickname(whitelist_path: str, uuid: str, extension: str = '') -> str:
     whitelist = get_whitelist(whitelist_path)
     for user in whitelist:
         if user['uuid'] == uuid:
@@ -31,11 +31,11 @@ def convert_uuid_to_nickname(whitelist_path: str, uuid: str) -> str:
         return 'User with provided uuid is not in whitelist...'
 
 
-def convert_nickname_to_uuid(whitelist_path: str, nickname: str) -> str:
+def convert_nickname_to_uuid(whitelist_path: str, nickname: str, extension: str = '') -> str:
     whitelist = get_whitelist(whitelist_path)
     for user in whitelist:
         if user['name'] == nickname:
-            return user['uuid']
+            return user['uuid'] + extension
     else:
         return 'User with provided nickname is not in whitelist...'
     
@@ -43,3 +43,4 @@ def convert_nickname_to_uuid(whitelist_path: str, nickname: str) -> str:
 def get_output_extension():
     try: return argv[2]
     except: return ''
+
