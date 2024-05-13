@@ -4,6 +4,13 @@
 It's suitable ***only*** for servers that use ***whitelist***  
 The tool comes in handy for automatisation and bash scripting.
 ---
+### Install & Build
+Simply clone the repo and build with pyinstaller.  
+Run the following command and tool will be installed:
+```shell
+git clone https://github.com/upconett/uuidnick && pip install uuidnick/requirements.txt && pyinstaller -F -u uuidnick uuidnick/main.py && cp uuidnick/dist/uuidnick /bin
+```
+---
 ### Usage
 ```shell
 uuidnick <uuid or nickname> <file extension (if needed)>
